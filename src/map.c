@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:25:29 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/07 05:25:30 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/08 04:06:54 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ char	**read_map(char *filename)
 	if (!map)
 		return (NULL);
 	while ((line = get_next_line(fd)))
-	{
 		map[i++] = line;
-	}
 	map[i] = NULL;
 	close(fd);
 	return (map);

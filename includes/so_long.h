@@ -6,20 +6,22 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:22:25 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/07 05:31:22 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/08 04:02:01 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "./ft_printf/libft/libft.h"
-# include "./ft_printf/ft_printf.h"
+# define BUFFER_SIZE 42
+
+# include "libft.h"
+#include "ft_printf.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include "./minilibx_opengl_20191021/mlx.h"
+# include "mlx.h"
 
 typedef struct s_game {
 	void	*mlx;
@@ -40,5 +42,11 @@ void	render_map(t_game *game);
 
 void	init_images(t_game *game);
 
+char	*gnl_strchr(char *s, int c);
+void	gnl_strjoin(char **line, char *buff);
+void	gnl_new_line(char **line, char *next_lines);
+char	*gnl_strdup(char **line);
+void	gnl_read(int fd, char **line);
+char	*get_next_line(int fd);
 
 #endif

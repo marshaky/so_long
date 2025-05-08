@@ -1,31 +1,46 @@
-NAME			= so_long
+NAME = so_long
 
-SRCS			= main.c map.c render.c
-OBJS			= $(SRCS:.c=.o)
+SRCSPATH = ./src/
+PRINTF_PATH = ./ft_printf/
+LIBFT_PATH = ./ft_printf/libft/
+MLXPATH = ./mlx/
+INCPATH = ./includes/ $(PRINTF_PATH) $(MLXPATH) $(LIBFT_PATH)
 
-FT_PRINTF_DIR	= ft_printf
-FT_PRINTF_LI	= $(FT_PRINTF_DIR)/libftprintf.a
+SRCS = \
+	$(SRCSPATH)get_next_line.c \
+	$(SRCSPATH)get_next_line_utils.c \
+	$(SRCSPATH)main.c \
+	$(SRCSPATH)map.c \
+	$(SRCSPATH)render.c
 
-MLX				= -lmlx -framework OpenGL -framework AppKit
+OBJS = $(SRCS:.c=.o)
 
-CC				= cc
-CFLAGS			= -Wall -Wextra -Werror
-RM				= rm -f
+PRINTF = $(PRINTF_PATH)/libftprintf.a
+MLX = $(MLXPATH)/libmlx.a
 
-all:			$(NAME)
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -DGL_SILENCE_DEPRECATION $(foreach H,$(INCPATH),-I$(H))
+MLXFLAGS = -framework OpenGL -framework AppKit
 
-$(NAME):		$(OBJS)
-					@$(MAKE) -C $(FT_PRINTF_DIR)
-					$(CC) $(CFLAGS) $(OBJS) $(FT_PRINTF_LIB) -o $(NAME) $(MLX)
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@make -C $(PRINTF_PATH)
+	@make -C $(MLXPATH)
+	$(CC) $(CFLAGS) $(OBJS) $(PRINTF) $(MLX) -I$(MLXPATH) -o $(NAME) $(MLXFLAGS)
+
+$(SRCSPATH)%.o: $(SRCSPATH)%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-				@$(MAKE) clean -C $(FT_PRINTF_DIR)
-				$(RM) $(OBJS)
+	@make clean -C $(PRINTF_PATH)
+	@make clean -C $(MLXPATH)
+	rm -f $(OBJS)
 
-fclean:			clean
-					@$(MAKE) fclean -C $(FT_PRINTF_DIR)
-					$(RM) $(NAME)
+fclean: clean
+	@make fclean -C $(PRINTF_PATH)
+	rm -f $(NAME)
 
-re:				fclean all
+re: fclean all
 
-.PHONY:			all clean fclean re
+.PHONY: all clean fclean re

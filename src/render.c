@@ -6,36 +6,41 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:25:23 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/07 05:26:05 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/08 04:37:49 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-#define TILE 64
-
-void	put_image(t_game *game, void *img, int x, int y)
-{
-	mlx_put_image_to_window(game->mlx, game->win, img, x * TILE, y * TILE);
-}
-
 void	render_map(t_game *game)
 {
-	for (int y = 0; game->map[y]; y++)
+	int	x, y;
+
+	y = 0;
+	while (game->map[y])
 	{
-		for (int x = 0; game->map[y][x]; x++)
+		x = 0;
+		while (game->map[y][x])
 		{
-			char c = game->map[y][x];
-			if (c == '1')
-				put_image(game, game->img_wall, x, y);
-			else
-				put_image(game, game->img_floor, x, y);
-			if (c == 'P')
-				put_image(game, game->img_player, x, y);
-			else if (c == 'C')
-				put_image(game, game->img_collectable, x, y);
-			else if (c == 'E')
-				put_image(game, game->img_exit, x, y);
+			char tile = game->map[y][x];
+
+			mlx_put_image_to_window(game->mlx, game->win, game->img_floor, x * 64, y * 64);
+			// if (tile == '1')
+			// 	mlx_put_image_to_window(game->mlx, game->win, game->img_wall, x * 64, y * 64);
+			if (tile == '1')
+			{
+				int color = 0x00FF00;
+				mlx_pixel_put(game->mlx, game->win, x * 64 + 10, y * 64 + 10, color);
+			}
+			else if (tile == 'P')
+				mlx_put_image_to_window(game->mlx, game->win, game->img_player, x * 64, y * 64);
+			else if (tile == 'C')
+				mlx_put_image_to_window(game->mlx, game->win, game->img_collectable, x * 64, y * 64);
+			else if (tile == 'E')
+				mlx_put_image_to_window(game->mlx, game->win, game->img_exit, x * 64, y * 64);
+
+			x++;
 		}
+		y++;
 	}
 }
