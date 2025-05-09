@@ -1,3 +1,57 @@
+# NAME = so_long
+
+# SRCSPATH = ./src/
+# PRINTF_PATH = ./ft_printf/
+# LIBFT_PATH = ./ft_printf/libft/
+# MLXPATH = ./mlx/
+# INCPATH = ./includes/ $(PRINTF_PATH) $(MLXPATH) $(LIBFT_PATH)
+
+# SRCS = \
+# 	$(SRCSPATH)get_next_line.c \
+# 	$(SRCSPATH)get_next_line_utils.c \
+# 	$(SRCSPATH)main.c \
+# 	$(SRCSPATH)map.c \
+# 	$(SRCSPATH)render.c
+
+# OBJS = $(SRCS:.c=.o)
+
+# PRINTF = $(PRINTF_PATH)/libftprintf.a
+# MLX = $(MLXPATH)/libmlx.a
+
+# CC = cc
+# CFLAGS = -Wall -Wextra -Werror $(foreach H,$(INCPATH),-I$(H))
+
+# UNAME_S := $(shell uname -s)
+
+# ifeq ($(UNAME_S),Darwin)
+# 	MLXFLAGS = -framework OpenGL -framework AppKit
+# else
+# 	MLXFLAGS = -lX11 -lXext -lm
+# endif
+
+# all: $(NAME)
+
+# $(NAME): $(OBJS)
+# 	make -C $(PRINTF_PATH)
+# 	make -C $(MLXPATH)
+# 	$(CC) $(CFLAGS) $(OBJS) $(PRINTF) $(MLX) -o $(NAME) $(MLXFLAGS)
+
+# $(SRCSPATH)%.o: $(SRCSPATH)%.c
+# 	$(CC) $(CFLAGS) -c $< -o $@
+
+# clean:
+# 	make clean -C $(PRINTF_PATH)
+# 	make clean -C $(MLXPATH)
+# 	rm -f $(OBJS)
+
+# fclean: clean
+# 	make fclean -C $(PRINTF_PATH)
+# 	rm -f $(NAME)
+
+# re: fclean all
+
+# .PHONY: all clean fclean re
+
 NAME = so_long
 
 SRCSPATH = ./src/
@@ -9,9 +63,11 @@ INCPATH = ./includes/ $(PRINTF_PATH) $(MLXPATH) $(LIBFT_PATH)
 SRCS = \
 	$(SRCSPATH)get_next_line.c \
 	$(SRCSPATH)get_next_line_utils.c \
-	$(SRCSPATH)main.c \
+	$(SRCSPATH)so_long.c \
 	$(SRCSPATH)map.c \
-	$(SRCSPATH)render.c
+	$(SRCSPATH)render.c \
+	$(SRCSPATH)input.c \
+	$(SRCSPATH)flood_fill.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -19,26 +75,33 @@ PRINTF = $(PRINTF_PATH)/libftprintf.a
 MLX = $(MLXPATH)/libmlx.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -DGL_SILENCE_DEPRECATION $(foreach H,$(INCPATH),-I$(H))
-MLXFLAGS = -framework OpenGL -framework AppKit
+CFLAGS = -Wall -Wextra -Werror $(foreach H,$(INCPATH),-I$(H))
+
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Darwin)
+	MLXFLAGS = -framework OpenGL -framework AppKit
+else
+	MLXFLAGS = -lX11 -lXext -lm
+endif
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@make -C $(PRINTF_PATH)
-	@make -C $(MLXPATH)
-	$(CC) $(CFLAGS) $(OBJS) $(PRINTF) $(MLX) -I$(MLXPATH) -o $(NAME) $(MLXFLAGS)
+	make -C $(PRINTF_PATH)
+	$(MAKE) -C $(MLXPATH) libmlx.a || echo "⚠️ Skipping mlx build"
+	$(CC) $(CFLAGS) $(OBJS) $(PRINTF) $(MLX) -o $(NAME) $(MLXFLAGS)
 
 $(SRCSPATH)%.o: $(SRCSPATH)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@make clean -C $(PRINTF_PATH)
-	@make clean -C $(MLXPATH)
+	make clean -C $(PRINTF_PATH)
+	rm -f $(MLXPATH)*.o $(MLXPATH)*.a
 	rm -f $(OBJS)
 
 fclean: clean
-	@make fclean -C $(PRINTF_PATH)
+	make fclean -C $(PRINTF_PATH)
 	rm -f $(NAME)
 
 re: fclean all
