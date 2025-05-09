@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:25:23 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/08 19:17:38 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/09 06:05:32 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	render_map(t_game *game)
 				mlx_put_image_to_window(game->mlx, game->win, game->img_collectable, x * 64, y * 64);
 			else if (tile == 'E')
 				mlx_put_image_to_window(game->mlx, game->win, game->img_exit, x * 64, y * 64);
-
+			else
+				mlx_put_image_to_window(game->mlx, game->win, game->img_floor, x * 64, y * 64);
 			x++;
 		}
 		y++;
