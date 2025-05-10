@@ -7,13 +7,16 @@ MLXPATH = ./mlx/
 INCPATH = ./includes/ $(PRINTF_PATH) $(MLXPATH) $(LIBFT_PATH)
 
 SRCS = \
+	$(SRCSPATH)draw.c \
+	$(SRCSPATH)game.c \
+	$(SRCSPATH)handlers.c \
+	$(SRCSPATH)key_hook.c \
+	$(SRCSPATH)utils.c \
+	$(SRCSPATH)validator.c \
 	$(SRCSPATH)get_next_line.c \
 	$(SRCSPATH)get_next_line_utils.c \
 	$(SRCSPATH)so_long.c \
 	$(SRCSPATH)map.c \
-	$(SRCSPATH)render.c \
-	$(SRCSPATH)input.c \
-	$(SRCSPATH)flood_fill.c
 
 OBJS = $(SRCS:.c=.o)
 

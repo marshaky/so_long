@@ -6,145 +6,107 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:25:29 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/09 05:43:09 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/10 05:57:09 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	count_lines(char *filename)
+void	init_map(t_game *game, char *line)
 {
-	int		fd;
-	int		lines = 0;
-	char	*line;
+	game->map = (char **)malloc(sizeof(char *) * 1);
+	if (!game->map)
+		throw_error("MemoryError : failed to allocate map\n");
 
-	fd = open(filename, O_RDONLY);
+	game->map[0] = line;
+	game->map_width = ft_strlen(line);
+	game->map_height = 1;
+	game->coin_count = 0;
+	game->exit_flag = 0;
+	game->player_cord.x = -1;
+	game->player_cord.y = -1;
+}
+
+// static void	check_for_player(t_game *game, char *line, int row)
+// {
+// 	int	x;
+
+// 	x = 0;
+// 	while (line[x])
+// 	{
+// 		if (line[x] == 'P')
+// 		{
+// 			game->player_cord.x = x;
+// 			game->player_cord.y = row;
+// 		}
+// 		x++;
+// 	}
+// }
+
+static void	add_map_line(t_game *game, char *line, int row)
+{
+	char	**tmp;
+
+	valid_characters(line);
+	valid_length(line, game->map_width);
+	game->map_height++;
+	tmp = (char **)ft_ptr_realloc(game->map, row, row + 1);
+	if (!tmp)
+		throw_error("MemoryError : realloc failed\n");
+	game->map = tmp;
+	game->map[row] = line;
+}
+
+static void	open_and_read_map(t_game *game, int fd)
+{
+	char	*line;
+	int		row;
+
+	row = 1;
+	line = ft_get_line(fd);
+	if (!line)
+		throw_error("FileError : map file is empty\n");
+	init_map(game, line);
+	while ((line = ft_get_line(fd)))
+		add_map_line(game, line, row++);
+	close(fd);
+}
+
+void	read_map(t_game *game, char *file)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (-1);
-	while ((line = get_next_line(fd)))
-	{
-		lines++;
-		free(line);
-	}
-	close(fd);
-	return (lines);
+		throw_error("FileError : failed to open map\n");
+	open_and_read_map(game, fd);
 }
 
-char	**read_map(char *filename)
-{
-	int		fd;
-	int		i = 0;
-	int		lines = count_lines(filename);
-	char	**map;
-	char	*line;
-
-	fd = open(filename, O_RDONLY);
-	if (fd < 0 || lines <= 0)
-		return (NULL);
-	map = malloc(sizeof(char *) * (lines + 1));
-	if (!map)
-		return (NULL);
-	while ((line = get_next_line(fd)))
-		map[i++] = line;
-	map[i] = NULL;
-	close(fd);
-	return (map);
-}
-
-int	is_valid_char(char c)
-{
-	return (c == '0' || c == '1' || c == 'P' || c == 'E' || c == 'C');
-}
-
-int	is_map_rectangular(char **map)
-{
-	int	len;
-	int	i;
-
-	len = ft_strlen(map[0]);
-	i = 1;
-	while (map[i])
-	{
-		if ((int)ft_strlen(map[i]) != len)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	is_map_walled(char **map)
-{
-	int		i;
-	int		width;
-	int		height;
-
-	width = ft_strlen(map[0]);
-	height = 0;
-	while (map[height])
-		height++;
-	i = 0;
-	while (i < width)
-	{
-		if (map[0][i] != '1' || map[height - 1][i] != '1')
-			return (0);
-		i++;
-	}
-	i = 0;
-	while (i < height)
-	{
-		if (map[i][0] != '1' || map[i][width - 1] != '1')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	validate_map(char **map)
-{
-	int	i = 0;
-	int	j;
-	int	p = 0;
-	int	c = 0;
-	int	e = 0;
-
-	if (!is_map_rectangular(map) || !is_map_walled(map))
-		return (0);
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (!is_valid_char(map[i][j]))
-				return (0);
-			if (map[i][j] == 'P')
-				p++;
-			else if (map[i][j] == 'C')
-				c++;
-			else if (map[i][j] == 'E')
-				e++;
-			j++;
-		}
-		i++;
-	}
-	return (p == 1 && c >= 1 && e >= 1);
-}
-
-char	**ft_split_map(char **map)
-{
-	int		i = 0;
-	char	**copy;
-
-	while (map[i])
-		i++;
-	copy = malloc(sizeof(char *) * (i + 1));
-	if (!copy)
-		return (NULL);
-	i = 0;
-	while (map[i])
-	{
-		copy[i] = ft_strdup(map[i]);
-		i++;
-	}
-	copy[i] = NULL;
-	return (copy);
-}
+// void	read_map(t_game *game, char *file)
+// {
+// 	int		fd;
+// 	char	*line;
+// 	char	**tmp;
+// 	int		i;
+	
+// 	i = 1;
+// 	fd = open(file, O_RDONLY);
+// 	if (fd < 0)
+// 		throw_error("FileError : failed to open map\n");
+// 	line = ft_get_line(fd);
+// 	if (!line)
+// 		throw_error("FileError : map file is empty\n");
+// 	init_map(game, line);
+// 	while ((line = ft_get_line(fd)))
+// 	{
+// 		valid_characters(line);
+// 		valid_length(line, game->map_width);
+// 		game->map_height++;
+// 		tmp = (char **)ft_ptr_realloc(game->map, game->map_height - 1, game->map_height);
+// 		if (!tmp)
+// 			throw_error("MemoryError : realloc failed\n");
+// 		game->map = tmp;
+// 		game->map[i++] = line;
+// 	}
+// 	close(fd);
+// }

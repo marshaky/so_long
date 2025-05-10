@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 04:47:16 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/09 04:47:19 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/09 06:49:13 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_next_line(int fd)
 	static char	*line;
 	char		*next_lines;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (null(&line));
 	if (!line)
 	{
