@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:13:28 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/10 05:49:46 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/10 23:15:46 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	init_window(t_game *game)
 	game->coin_count = 0;
 	game->moves = 0;
 	game->endgame = 0;
-	game->player_cord.x = -1; 
-	game->player_cord.y = -1;
 }
 
 void	init_imgs(t_game *game)
@@ -35,7 +33,7 @@ void	init_imgs(t_game *game)
 	game->img_floor = ft_make_xpm_img(game, "ground.xpm");
 	game->img_exit = ft_make_xpm_img(game, "exit.xpm");
 	game->img_coin = ft_make_xpm_img(game, "star0.xpm");
-	game->img_player = ft_make_xpm_img(game, "player.xpm");
+	game->img_player = ft_make_xpm_img(game, "rkirby0.xpm");
 }
 
 void	init_game(t_game *game)

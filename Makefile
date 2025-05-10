@@ -38,7 +38,6 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(PRINTF_PATH)
-	$(MAKE) -C $(MLXPATH) libmlx.a || echo "⚠️ Skipping mlx build"
 	$(CC) $(CFLAGS) $(OBJS) $(PRINTF) $(MLX) -o $(NAME) $(MLXFLAGS)
 
 $(SRCSPATH)%.o: $(SRCSPATH)%.c
@@ -46,7 +45,6 @@ $(SRCSPATH)%.o: $(SRCSPATH)%.c
 
 clean:
 	make clean -C $(PRINTF_PATH)
-	rm -f $(MLXPATH)*.o $(MLXPATH)*.a
 	rm -f $(OBJS)
 
 fclean: clean

@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:44:56 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/10 06:07:21 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/10 23:20:54 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	check_component(t_game *game, char c, int x, int y)
 			throw_error("ComponentError : more than one player\n");
 		game->player_cord.x = x;
 		game->player_cord.y = y;
+		game->map[y][x] = '0';
 	}
 	else if (c == 'C')
 		game->coin_count++;
@@ -79,10 +80,11 @@ void	check_component(t_game *game, char c, int x, int y)
 		game->exit_flag++;
 }
 
+
 void	count_components(t_game *game)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
 	char	c;
 
 	y = 0;

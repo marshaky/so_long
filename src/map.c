@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:25:29 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/10 05:57:09 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/10 23:20:40 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,6 @@ void	init_map(t_game *game, char *line)
 	game->player_cord.x = -1;
 	game->player_cord.y = -1;
 }
-
-// static void	check_for_player(t_game *game, char *line, int row)
-// {
-// 	int	x;
-
-// 	x = 0;
-// 	while (line[x])
-// 	{
-// 		if (line[x] == 'P')
-// 		{
-// 			game->player_cord.x = x;
-// 			game->player_cord.y = row;
-// 		}
-// 		x++;
-// 	}
-// }
 
 static void	add_map_line(t_game *game, char *line, int row)
 {
@@ -81,32 +65,3 @@ void	read_map(t_game *game, char *file)
 		throw_error("FileError : failed to open map\n");
 	open_and_read_map(game, fd);
 }
-
-// void	read_map(t_game *game, char *file)
-// {
-// 	int		fd;
-// 	char	*line;
-// 	char	**tmp;
-// 	int		i;
-	
-// 	i = 1;
-// 	fd = open(file, O_RDONLY);
-// 	if (fd < 0)
-// 		throw_error("FileError : failed to open map\n");
-// 	line = ft_get_line(fd);
-// 	if (!line)
-// 		throw_error("FileError : map file is empty\n");
-// 	init_map(game, line);
-// 	while ((line = ft_get_line(fd)))
-// 	{
-// 		valid_characters(line);
-// 		valid_length(line, game->map_width);
-// 		game->map_height++;
-// 		tmp = (char **)ft_ptr_realloc(game->map, game->map_height - 1, game->map_height);
-// 		if (!tmp)
-// 			throw_error("MemoryError : realloc failed\n");
-// 		game->map = tmp;
-// 		game->map[i++] = line;
-// 	}
-// 	close(fd);
-// }
