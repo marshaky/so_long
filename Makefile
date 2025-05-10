@@ -17,6 +17,8 @@ SRCS = \
 	$(SRCSPATH)get_next_line_utils.c \
 	$(SRCSPATH)so_long.c \
 	$(SRCSPATH)map.c \
+	# $(SRCSPATH)flood_fill.c \
+	# $(SRCSPATH)check_surrounded.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -24,7 +26,7 @@ PRINTF = $(PRINTF_PATH)/libftprintf.a
 MLX = $(MLXPATH)/libmlx.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror $(foreach H,$(INCPATH),-I$(H))
+CFLAGS = -Wall -Wextra -Werror -g $(foreach H,$(INCPATH),-I$(H))
 
 UNAME_S := $(shell uname -s)
 

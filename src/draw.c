@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 04:01:27 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/10 23:06:52 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/11 02:39:43 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,14 @@ void	draw_exit(t_game *game)
 		{
 			if (game->map[y][x] == 'E')
 			{
-				if (game->coin_count == 0)
-					ft_put_img(game, game->img_exit, x * game->img_width, y * game->img_height);
-				else
-					ft_put_img(game, game->img_floor, x * game->img_width, y * game->img_height);
+				ft_put_img(game, game->img_exit, x * game->img_width, y * game->img_height);
 			}
 			x++;
 		}
 		y++;
 	}
 }
+
 
 void	draw_player(t_game *game)
 {
@@ -73,29 +71,29 @@ void	draw_init(t_game *game)
 	draw_player(game);
 }
 
-void	draw_animate_player(t_game *game)
-{
-	if (game->move_status == RIGHT)
-		game->player_cord.x += 1;
-	else if (game->move_status == LEFT)
-		game->player_cord.x -= 1;
-	else if (game->move_status == TOP)
-		game->player_cord.y -= 1;
-	else if (game->move_status == BOTTOM)
-		game->player_cord.y += 1;
-	else
-		return ;
+// void	draw_animate_player(t_game *game)
+// {
+// 	// if (game->move_status == RIGHT)
+// 	// 	game->player_cord.x += 1;
+// 	// else if (game->move_status == LEFT)
+// 	// 	game->player_cord.x -= 1;
+// 	// else if (game->move_status == TOP)
+// 	// 	game->player_cord.y -= 1;
+// 	// else if (game->move_status == BOTTOM)
+// 	// 	game->player_cord.y += 1;
+// 	// else
+// 	// 	return ;
 
-	ft_put_img(game, game->img_floor,
-		game->player_cord.x * game->img_width,
-		game->player_cord.y * game->img_height);
-	ft_put_img(game, game->img_player,
-		game->player_cord.x * game->img_width,
-		game->player_cord.y * game->img_height);
+// 	// ft_put_img(game, game->img_floor,
+// 	// 	game->player_cord.x * game->img_width,
+// 	// 	game->player_cord.y * game->img_height);
+// 	// ft_put_img(game, game->img_player,
+// 	// 	game->player_cord.x * game->img_width,
+// 	// 	game->player_cord.y * game->img_height);
 
-	game->moves++;
-	game->move_status = NONE;
-}
+// 	// game->moves++;
+// 	// game->move_status = NONE;
+// }
 
 void	draw_animate_collect(t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:57:01 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/10 04:53:56 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/11 02:23:04 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ int	key_hook(int keycode, t_game *game)
 int	loop_hook(t_game *game)
 {
 	if (!game->endgame)
-		init_game(game);
+		draw_init(game);
 	return (0);
 }

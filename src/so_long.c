@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:30:21 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/10 23:13:20 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/11 03:21:01 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,13 @@ int	main(int argc, char **argv)
 	game.img_height = 64;
 	game.player_cord.x = -1;
 	game.player_cord.y = -1;
-
 	valid_extension(argv[1]);
 	read_map(&game, argv[1]);
 	count_components(&game);
-
+	count_coins(&game);
 	init_window(&game);
 	init_imgs(&game);
 	start_game(&game);
-
 	mlx_key_hook(game.win, key_hook, &game);
 	mlx_hook(game.win, 17, 0, close_game, &game);
 	mlx_loop_hook(game.mlx, loop_hook, &game);

@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:22:25 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/10 23:21:47 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/11 03:20:21 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,17 @@ void	draw_tiles(t_game *game);
 void	draw_exit(t_game *game);
 void	draw_player(t_game *game);
 void	draw_init(t_game *game);
-void	draw_animate_player(t_game *game);
+// void	draw_animate_player(t_game *game);
 void	draw_animate_collect(t_game *game);
 void	find_player_position(t_game *game);
 
 void	init_window(t_game *game);
 void	init_imgs(t_game *game);
-void	init_game(t_game *game);
+// void	init_game(t_game *game);
 void	start_game(t_game *game);
 int		close_game(t_game *game);
 
-void	handle_wall(t_game *game, int dx, int dy);
+// void	handle_wall(t_game *game, int dx, int dy);
 void	handle_collect(t_game *game);
 void	handle_exit(t_game *game);
 void	handle_location(t_game *game, int dx, int dy);
@@ -109,6 +109,12 @@ void	valid_length(char *line, int expected);
 void	valid_wall(t_game *game, int row);
 void	check_component(t_game *game, char c, int x, int y);
 void	count_components(t_game *game);
+int		count_coins(t_game *game);
+// void	validate_path(t_game *game);
+// int		has_unreachable_components(char **map);
+// void	flood_fill(char **map, int x, int y);
+// char	**copy_map(t_game *game);
+// void	check_surrounded(t_game *game);
 
 char	*gnl_strchr(char *s, int c);
 void	gnl_strjoin(char **line, char *buff);
