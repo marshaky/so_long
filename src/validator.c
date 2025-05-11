@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:44:56 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/10 23:20:54 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/12 02:24:49 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,32 +78,4 @@ void	check_component(t_game *game, char c, int x, int y)
 		game->coin_count++;
 	else if (c == 'E')
 		game->exit_flag++;
-}
-
-
-void	count_components(t_game *game)
-{
-	int		y;
-	int		x;
-	char	c;
-
-	y = 0;
-	while (y < game->map_height)
-	{
-		valid_wall(game, y);
-		x = 0;
-		while (x < game->map_width)
-		{
-			c = game->map[y][x];
-			check_component(game, c, x, y);
-			x++;
-		}
-		y++;
-	}
-	if (game->player_cord.x == -1)
-		throw_error("ComponentError : player not found\n");
-	if (game->coin_count < 1)
-		throw_error("ComponentError : no coins on map\n");
-	if (game->exit_flag < 1)
-		throw_error("ComponentError : no exit on map\n");
 }

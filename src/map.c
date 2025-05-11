@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:25:29 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/10 23:20:40 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/12 02:23:09 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	init_map(t_game *game, char *line)
 	game->map = (char **)malloc(sizeof(char *) * 1);
 	if (!game->map)
 		throw_error("MemoryError : failed to allocate map\n");
-
 	game->map[0] = line;
 	game->map_width = ft_strlen(line);
 	game->map_height = 1;
@@ -51,8 +50,12 @@ static void	open_and_read_map(t_game *game, int fd)
 	if (!line)
 		throw_error("FileError : map file is empty\n");
 	init_map(game, line);
-	while ((line = ft_get_line(fd)))
+	line = ft_get_line(fd);
+	while (line)
+	{
 		add_map_line(game, line, row++);
+		line = ft_get_line(fd);
+	}
 	close(fd);
 }
 
@@ -64,4 +67,11 @@ void	read_map(t_game *game, char *file)
 	if (fd < 0)
 		throw_error("FileError : failed to open map\n");
 	open_and_read_map(game, fd);
+}
+
+void	throw_error(char *message)
+{
+	ft_putstr_fd("\033[31mError\n\033[0m", 2);
+	ft_putstr_fd(message, 2);
+	exit(EXIT_FAILURE);
 }

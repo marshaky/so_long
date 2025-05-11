@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 04:17:27 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/10 23:21:00 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/12 02:23:27 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,6 @@ void	*ft_ptr_realloc(void *buf, int before_size, int after_size)
 	return ((void *)dst);
 }
 
-// void	*ft_ptr_realloc(void *buf, int before_size, int after_size)
-// {
-// 	int		idx;
-// 	char	**src;
-// 	char	**dst;
-
-// 	src = (char **)buf;
-// 	dst = (char **)malloc(sizeof(char *) * after_size);
-// 	idx = 0;
-// 	while (idx < before_size)
-// 	{
-// 		dst[idx] = src[idx];
-// 		idx++;
-// 	}
-// 	free(buf);
-// 	return ((void *)dst);
-// }
-
 char	*ft_get_line(int fd)
 {
 	char	*line;
@@ -98,11 +80,4 @@ char	*ft_get_line(int fd)
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
 	return (line);
-}
-
-void	throw_error(char *message)
-{
-	ft_putstr_fd("\033[31mError\n\033[0m", 2);
-	ft_putstr_fd(message, 2);
-	exit(EXIT_FAILURE);
 }

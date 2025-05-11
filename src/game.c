@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:13:28 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/11 03:02:05 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/12 02:26:57 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_window(t_game *game)
 	y = game->map_height;
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, 64 * x, 64 * y, "KIRBY");
-	game->move_status = NONE;
+	game->move_status = 0;
 	game->coin_count = count_coins(game);
 	game->moves = 0;
 	game->endgame = 0;
@@ -51,7 +51,8 @@ int	close_game(t_game *game)
 
 int	count_coins(t_game *game)
 {
-	int	x, y;
+	int	x;
+	int	y;
 
 	game->coin_count = 0;
 	y = 0;
@@ -68,4 +69,3 @@ int	count_coins(t_game *game)
 	}
 	return (game->coin_count);
 }
-

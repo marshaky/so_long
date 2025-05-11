@@ -6,75 +6,68 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:09:38 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/11 03:15:47 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/12 02:13:30 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	flood_fill(char **map, int x, int y, int height, int width)
+static void	ff_recursive(char **map, int x, int y, t_point size)
 {
-	if (x < 0 || y < 0 || x >= width || y >= height)
-		return;
+	if (x < 0 || y < 0 || x >= size.x || y >= size.y)
+		return ;
 	if (map[y][x] == '1' || map[y][x] == 'F')
-		return;
+		return ;
 	map[y][x] = 'F';
-	flood_fill(map, x + 1, y, height, width);
-	flood_fill(map, x - 1, y, height, width);
-	flood_fill(map, x, y + 1, height, width);
-	flood_fill(map, x, y - 1, height, width);
+	ff_recursive(map, x + 1, y, size);
+	ff_recursive(map, x - 1, y, size);
+	ff_recursive(map, x, y + 1, size);
+	ff_recursive(map, x, y - 1, size);
 }
 
-static char	**copy_map(t_game *game)
+static char	**copy_map(char **map, int height)
 {
-	int		y;
 	char	**copy;
+	int		i;
 
-	copy = malloc(sizeof(char *) * (game->map_height + 1));
+	copy = malloc(sizeof(char *) * (height + 1));
 	if (!copy)
-		throw_error("MemoryError: can't allocate map copy");
-
-	y = 0;
-	while (y < game->map_height)
+		return (NULL);
+	i = 0;
+	while (i < height)
 	{
-		copy[y] = ft_strdup(game->map[y]);
-		y++;
+		copy[i] = ft_strdup(map[i]);
+		i++;
 	}
-	copy[y] = NULL;
+	copy[height] = NULL;
 	return (copy);
 }
 
-static void	free_map_copy(char **map)
+void	validate_reachability(t_game *game)
 {
-	int i = 0;
-	while (map[i])
-		free(map[i++]);
-	free(map);
-}
+	char	**map_copy;
+	t_point	size;
+	int		i;
+	int		j;
 
-void	validate_path(t_game *game)
-{
-	char	**map_copy = copy_map(game);
-	int		x = game->player_cord.x;
-	int		y = game->player_cord.y;
-	int		i, j;
-
-	flood_fill(map_copy, x, y, game->map_height, game->map_width);
-
-	i = 0;
-	while (i < game->map_height)
+	map_copy = copy_map(game->map, game->map_height);
+	if (!map_copy)
+		throw_error("MemoryError: couldn't copy map for flood fill\n");
+	size.x = game->map_width;
+	size.y = game->map_height;
+	ff_recursive(map_copy, game->player_cord.x, game->player_cord.y, size);
+	i = -1;
+	while (++i < game->map_height)
 	{
-		j = 0;
-		while (j < game->map_width)
+		j = -1;
+		while (++j < game->map_width)
 		{
-			if ((game->map[i][j] == 'C' || game->map[i][j] == 'E') && map_copy[i][j] != 'F')
-			{
-				free_map_copy(map_copy);
-				throw_error("PathError: unreachable coin or exit\n");
-			}
-			j++;
+			if (game->map[i][j] == 'C' && map_copy[i][j] != 'F')
+				throw_error("PathError: unreachable coin found\n");
+			if (game->map[i][j] == 'E' && map_copy[i][j] != 'F')
+				throw_error("PathError: unreachable exit found\n");
 		}
-		i++;
+		free(map_copy[i]);
 	}
-	free_map_copy(map_copy);
+	free(map_copy);
 }
