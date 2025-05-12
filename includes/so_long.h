@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:22:25 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/12 02:28:24 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:19:50 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,20 @@
 # include "mlx.h"
 
 # define KEY_EXIT 17
-# define KEY_W 13
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_A 0
-# define KEY_ESC 53
+# ifdef __APPLE__
+#  define KEY_W 13
+#  define KEY_S 1
+#  define KEY_D 2
+#  define KEY_A 0
+#  define KEY_ESC 53
+# else
+#  define KEY_EXIT 17
+#  define KEY_W 119
+#  define KEY_S 115
+#  define KEY_D 100
+#  define KEY_A 97
+#  define KEY_ESC 65307
+# endif
 # define ASSET_PATH "./assets/"
 
 typedef struct s_point
@@ -58,6 +67,7 @@ typedef struct s_game
 	int		move_status;
 	int		endgame;
 	t_point	map_cord;
+	t_point	exit;
 	t_point	player_cord;
 
 }	t_game;
@@ -100,5 +110,7 @@ void	gnl_new_line(char **line, char *next_lines);
 char	*gnl_strdup(char **line);
 void	gnl_read(int fd, char **line);
 char	*get_next_line(int fd);
+void	show_door(t_game *game);
+void	save_exit(t_game *game);
 
 #endif

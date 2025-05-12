@@ -193,7 +193,7 @@ static char *result[] = {
 "OX c #FFFBEE",
 "+X c #FFFBFF",
 "@X c #FFFBF3",
-"#X c None",
+"#X c #09082D",
 /* pixels */
 "#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X",
 "#X#Xw #X#X#Xw #X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X#X",

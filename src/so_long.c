@@ -6,11 +6,39 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:30:21 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/12 02:21:17 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:17:40 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void show_door(t_game *game)
+{
+	if (game->map[game->exit.y][game->exit.x] == '0')
+		game->map[game->exit.y][game->exit.x] = 'E';
+}
+
+void save_exit(t_game *game)
+{
+	int i = 0; 
+	int j = 0;
+	
+	while(i < game->map_height)
+	{
+		j = 0;
+		while(game->map[i][j])
+		{
+			if (game->map[i][j] == 'E')
+			{
+				game->exit.x = j;
+				game->exit.y = i;
+				game->map[i][j] = '0';
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -26,6 +54,7 @@ int	main(int argc, char **argv)
 	read_map(&game, argv[1]);
 	count_components(&game);
 	validate_reachability(&game);
+	save_exit(&game);
 	count_coins(&game);
 	init_window(&game);
 	init_imgs(&game);

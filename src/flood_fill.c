@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:09:38 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/12 02:13:30 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:15:02 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	validate_reachability(t_game *game)
 			if (game->map[i][j] == 'C' && map_copy[i][j] != 'F')
 				throw_error("PathError: unreachable coin found\n");
 			if (game->map[i][j] == 'E' && map_copy[i][j] != 'F')
+				throw_error("PathError: unreachable exit found\n");
+			if (game->map[i][j] == '0' && map_copy[i][j] != 'F')
 				throw_error("PathError: unreachable exit found\n");
 		}
 		free(map_copy[i]);
