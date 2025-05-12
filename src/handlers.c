@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:56:04 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/12 02:31:45 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:56:28 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	handle_location(t_game *game, int dx, int dy)
 	game->player_cord.x = new_x;
 	game->player_cord.y = new_y;
 	game->moves++;
-	printf("Moves: %d\n", game->moves);
+	ft_printf("Moves: %d\n", game->moves);
 	if (game->map[new_y][new_x] == 'C')
 	{
 		game->map[new_y][new_x] = '0';

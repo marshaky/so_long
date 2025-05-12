@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:13:28 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/12 02:26:57 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:48:58 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	init_imgs(t_game *game)
 void	start_game(t_game *game)
 {
 	draw_init(game);
-	printf("\033[1;33m== Start Game ==\033[0m\n");
+	ft_printf("\033[1;33m== Start Game ==\033[0m\n");
 }
 
 int	close_game(t_game *game)
 {
-	printf("END\n");
+	ft_printf("END\n");
 	mlx_destroy_window(game->mlx, game->win);
 	exit(EXIT_SUCCESS);
 }

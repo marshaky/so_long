@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:25:29 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/12 02:23:09 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:51:33 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ static void	add_map_line(t_game *game, char *line, int row)
 	game->map_height++;
 	tmp = (char **)ft_ptr_realloc(game->map, row, row + 1);
 	if (!tmp)
+	{
+		free(tmp);
 		throw_error("MemoryError : realloc failed\n");
+	}
 	game->map = tmp;
 	game->map[row] = line;
 }
@@ -48,7 +51,10 @@ static void	open_and_read_map(t_game *game, int fd)
 	row = 1;
 	line = ft_get_line(fd);
 	if (!line)
+	{
+		free(line);
 		throw_error("FileError : map file is empty\n");
+	}
 	init_map(game, line);
 	line = ft_get_line(fd);
 	while (line)

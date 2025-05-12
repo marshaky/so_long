@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:09:38 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/13 01:15:02 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:53:50 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ static char	**copy_map(char **map, int height)
 
 	copy = malloc(sizeof(char *) * (height + 1));
 	if (!copy)
+	{
+		free(copy);
 		return (NULL);
+	}
 	i = 0;
 	while (i < height)
 	{
@@ -43,19 +46,11 @@ static char	**copy_map(char **map, int height)
 	return (copy);
 }
 
-void	validate_reachability(t_game *game)
+static void	check_reachability(t_game *game, char **map_copy)
 {
-	char	**map_copy;
-	t_point	size;
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
-	map_copy = copy_map(game->map, game->map_height);
-	if (!map_copy)
-		throw_error("MemoryError: couldn't copy map for flood fill\n");
-	size.x = game->map_width;
-	size.y = game->map_height;
-	ff_recursive(map_copy, game->player_cord.x, game->player_cord.y, size);
 	i = -1;
 	while (++i < game->map_height)
 	{
@@ -67,9 +62,26 @@ void	validate_reachability(t_game *game)
 			if (game->map[i][j] == 'E' && map_copy[i][j] != 'F')
 				throw_error("PathError: unreachable exit found\n");
 			if (game->map[i][j] == '0' && map_copy[i][j] != 'F')
-				throw_error("PathError: unreachable exit found\n");
+				throw_error("PathError: unreachable tile found\n");
 		}
-		free(map_copy[i]);
 	}
+}
+
+void	validate_reachability(t_game *game)
+{
+	char	**map_copy;
+	t_point	size;
+	int		i;
+
+	map_copy = copy_map(game->map, game->map_height);
+	if (!map_copy)
+		throw_error("MemoryError: couldn't copy map for flood fill\n");
+	size.x = game->map_width;
+	size.y = game->map_height;
+	ff_recursive(map_copy, game->player_cord.x, game->player_cord.y, size);
+	check_reachability(game, map_copy);
+	i = 0;
+	while (i < game->map_height)
+		free(map_copy[i++]);
 	free(map_copy);
 }

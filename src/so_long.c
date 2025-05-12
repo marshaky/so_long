@@ -6,27 +6,29 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:30:21 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/13 01:17:40 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:43:30 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void show_door(t_game *game)
+void	show_door(t_game *game)
 {
 	if (game->map[game->exit.y][game->exit.x] == '0')
 		game->map[game->exit.y][game->exit.x] = 'E';
 }
 
-void save_exit(t_game *game)
+void	save_exit(t_game *game)
 {
-	int i = 0; 
-	int j = 0;
-	
-	while(i < game->map_height)
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < game->map_height)
 	{
 		j = 0;
-		while(game->map[i][j])
+		while (game->map[i][j])
 		{
 			if (game->map[i][j] == 'E')
 			{

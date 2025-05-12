@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 04:17:27 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/12 02:23:27 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:55:02 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	*ft_make_xpm_img(t_game *game, char *xpm_file)
 	free(path);
 	if (!img)
 	{
-		printf("fileName: %s\n", xpm_file);
+		free(img);
+		ft_printf("fileName: %s\n", xpm_file);
 		throw_error("XPM Error : check ASSET_PATH or fileName");
 	}
 	else if (!(width == game->img_width && height == game->img_height))
@@ -55,7 +56,10 @@ void	*ft_ptr_realloc(void *buf, int before_size, int after_size)
 	src = (char **)buf;
 	dst = (char **)malloc(sizeof(char *) * after_size);
 	if (!dst)
+	{
+		free(dst);
 		return (NULL);
+	}
 	i = 0;
 	while (i < before_size)
 	{
@@ -75,7 +79,10 @@ char	*ft_get_line(int fd)
 
 	line = get_next_line(fd);
 	if (!line)
+	{
+		free(line);
 		return (NULL);
+	}
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
