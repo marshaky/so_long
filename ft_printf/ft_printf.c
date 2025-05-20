@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 20:07:05 by marshaky          #+#    #+#             */
-/*   Updated: 2025/02/15 17:18:11 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:13:16 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_is_argument(int c)
 {
-	return (c == 'c' || c == 's' || c == '%' || c == 'd' || c == 'i' \
-			|| c == 'p' || c == 'x' || c == 'X' || c == 'u');
+	return (c == 'c' || c == 's' || c == '%' || c == 'd' || c == 'i' || c == 'p'
+		|| c == 'x' || c == 'X' || c == 'u');
 }
 
 int	ft_formats(va_list args, char specifier)

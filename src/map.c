@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:25:29 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/13 01:51:33 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/21 03:09:08 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ static void	add_map_line(t_game *game, char *line, int row)
 {
 	char	**tmp;
 
+	if (row == 0)
+	{
+		init_map(game, line);
+		return ;
+	}
 	valid_characters(line);
 	valid_length(line, game->map_width);
 	game->map_height++;
@@ -45,17 +50,10 @@ static void	add_map_line(t_game *game, char *line, int row)
 
 static void	open_and_read_map(t_game *game, int fd)
 {
-	char	*line;
 	int		row;
+	char	*line;
 
-	row = 1;
-	line = ft_get_line(fd);
-	if (!line)
-	{
-		free(line);
-		throw_error("FileError : map file is empty\n");
-	}
-	init_map(game, line);
+	row = 0;
 	line = ft_get_line(fd);
 	while (line)
 	{

@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:22:25 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/13 01:19:50 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/21 03:12:38 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int		loop_hook(t_game *game);
 void	init_map(t_game *game, char *line);
 void	read_map(t_game *game, char *file);
 void	*ft_make_xpm_img(t_game *game, char *xpm_file);
-void	load_images(t_game *game);
 void	ft_put_img(t_game *game, void *img, int x, int y);
+void	destroy_imgs(t_game *game);
 void	*ft_ptr_realloc(void *buf, int before_size, int after_size);
 char	*ft_get_line(int fd);
 void	throw_error(char *message);
@@ -112,5 +112,6 @@ void	gnl_read(int fd, char **line);
 char	*get_next_line(int fd);
 void	show_door(t_game *game);
 void	save_exit(t_game *game);
+void	free_split(char **str);
 
 #endif

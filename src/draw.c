@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 04:01:27 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/12 02:11:36 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/21 03:15:16 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,12 @@ void	draw_player(t_game *game)
 
 void	draw_init(t_game *game)
 {
+	init_imgs(game);
 	draw_tiles(game);
 	draw_animate_collect(game);
 	draw_exit(game);
 	draw_player(game);
+	destroy_imgs(game);
 }
 
 void	draw_animate_collect(t_game *game)

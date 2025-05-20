@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:30:21 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/13 01:43:30 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/21 03:09:24 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	main(int argc, char **argv)
 	save_exit(&game);
 	count_coins(&game);
 	init_window(&game);
-	init_imgs(&game);
 	start_game(&game);
 	mlx_key_hook(game.win, key_hook, &game);
 	mlx_hook(game.win, 17, 0, close_game, &game);

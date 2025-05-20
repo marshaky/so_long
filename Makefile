@@ -17,7 +17,8 @@ SRCS = \
 	$(SRCSPATH)get_next_line_utils.c \
 	$(SRCSPATH)so_long.c \
 	$(SRCSPATH)map.c \
-	$(SRCSPATH)flood_fill.c
+	$(SRCSPATH)flood_fill.c \
+	$(SRCSPATH)img.c
 
 OBJS = $(SRCS:.c=.o)
 

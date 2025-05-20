@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:57:01 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/13 01:16:43 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/21 03:17:09 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	loop_hook(t_game *game)
 	if (!game->coin_count)
 		show_door(game);
 	if (!game->endgame)
+	{
 		draw_init(game);
+	}
 	return (0);
 }

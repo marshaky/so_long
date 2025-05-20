@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:13:28 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/13 01:48:58 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/05/21 03:12:14 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void	start_game(t_game *game)
 int	close_game(t_game *game)
 {
 	ft_printf("END\n");
+	free_split(game->map);
 	mlx_destroy_window(game->mlx, game->win);
+	// mlx_destroy_display(game->mlx);
+	free(game->mlx);
 	exit(EXIT_SUCCESS);
 }
 
