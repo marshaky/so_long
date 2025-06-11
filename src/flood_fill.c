@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:09:38 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/13 01:53:50 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:25:23 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	check_reachability(t_game *game, char **map_copy)
 			if (game->map[i][j] == 'E' && map_copy[i][j] != 'F')
 				throw_error("PathError: unreachable exit found\n");
 			if (game->map[i][j] == '0' && map_copy[i][j] != 'F')
-				throw_error("PathError: unreachable tile found\n");
+				throw_error("PathError: unreachable player found\n");
 		}
 	}
 }

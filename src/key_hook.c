@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:57:01 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/21 03:17:09 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:20:38 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	move_key_hook(int keycode, t_game *game)
 {
-	if (keycode == KEY_W)
+	if (keycode == KEY_W || keycode == KEY_UP)
 		handle_location(game, 0, -1);
-	else if (keycode == KEY_S)
+	else if (keycode == KEY_S || keycode == KEY_DOWN)
 		handle_location(game, 0, 1);
-	else if (keycode == KEY_A)
+	else if (keycode == KEY_A || keycode == KEY_LEFT)
 		handle_location(game, -1, 0);
-	else if (keycode == KEY_D)
+	else if (keycode == KEY_D || keycode == KEY_RIGHT)
 		handle_location(game, 1, 0);
 }
 
 int	key_hook(int keycode, t_game *game)
 {
-	if (keycode == KEY_ESC)
+	if (keycode == KEY_ESC || keycode == KEY_Q)
 		close_game(game);
 	else
 		move_key_hook(keycode, game);

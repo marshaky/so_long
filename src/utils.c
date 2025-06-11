@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 04:17:27 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/21 03:16:45 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:17:04 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	*ft_ptr_realloc(void *buf, int before_size, int after_size)
 	return ((void *)dst);
 }
 
-void	free_split(char **str)
+void	free_split(char **str, int height)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (i < height)
 	{
 		free(str[i]);
 		i++;

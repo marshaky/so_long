@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:22:25 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/21 03:12:38 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:52:29 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@
 #  define KEY_D 2
 #  define KEY_A 0
 #  define KEY_ESC 53
+#  define KEY_Q 12
+#  define KEY_UP 126
+#  define KEY_LEFT 123
+#  define KEY_DOWN 125
+#  define KEY_RIGHT 124
 # else
 #  define KEY_EXIT 17
 #  define KEY_W 119
@@ -37,8 +42,13 @@
 #  define KEY_D 100
 #  define KEY_A 97
 #  define KEY_ESC 65307
+#  define KEY_Q 113
+#  define KEY_UP 65362
+#  define KEY_LEFT 65361
+#  define KEY_DOWN 65364
+#  define KEY_RIGHT 65363
 # endif
-# define ASSET_PATH "./assets/"
+# define ASSET_PATH "./textures/"
 
 typedef struct s_point
 {
@@ -112,6 +122,6 @@ void	gnl_read(int fd, char **line);
 char	*get_next_line(int fd);
 void	show_door(t_game *game);
 void	save_exit(t_game *game);
-void	free_split(char **str);
+void	free_split(char **str, int height);
 
 #endif
