@@ -6,7 +6,7 @@
 /*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:44:56 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/12 03:36:45 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:55:36 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	valid_extension(char *filename)
 	char	*ext;
 
 	ext = ft_strrchr(filename, '.');
-	if (!ext || ft_strncmp(ext, ".ber", 4) != 0)
+	if (!ext || ft_strncmp(ext, ".ber", 4) != 0
+		|| ext == filename || ext[-1] == '/' )
 		throw_error("ExtensionError : file must end with .ber\n");
 }
 
