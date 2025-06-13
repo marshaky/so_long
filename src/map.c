@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:25:29 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/21 03:09:08 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/13 20:18:45 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_map(t_game *game, char *line)
 {
 	game->map = (char **)malloc(sizeof(char *) * 1);
 	if (!game->map)
-		throw_error("MemoryError : failed to allocate map\n");
+		free_throw("MemoryError : failed to allocate map\n", game, NULL);
 	game->map[0] = line;
 	game->map_width = ft_strlen(line);
 	game->map_height = 1;
@@ -35,14 +35,13 @@ static void	add_map_line(t_game *game, char *line, int row)
 		init_map(game, line);
 		return ;
 	}
-	valid_characters(line);
-	valid_length(line, game->map_width);
 	game->map_height++;
+	valid_characters(line, game);
 	tmp = (char **)ft_ptr_realloc(game->map, row, row + 1);
 	if (!tmp)
 	{
 		free(tmp);
-		throw_error("MemoryError : realloc failed\n");
+		free_throw("MemoryError : realloc failed\n", game, NULL);
 	}
 	game->map = tmp;
 	game->map[row] = line;
@@ -59,6 +58,12 @@ static void	open_and_read_map(t_game *game, int fd)
 	{
 		add_map_line(game, line, row++);
 		line = ft_get_line(fd);
+	}
+	row = 0;
+	while (row < game->map_height)
+	{
+		valid_length(game->map[row], game->map_width, game);
+		row++;
 	}
 	close(fd);
 }

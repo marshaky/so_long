@@ -6,7 +6,7 @@
 /*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 04:17:27 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/11 18:17:04 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/13 20:12:10 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_ptr_realloc(void *buf, int before_size, int after_size)
 	char	**dst;
 
 	src = (char **)buf;
-	dst = (char **)malloc(sizeof(char *) * after_size);
+	dst = (char **)malloc(sizeof(char *) * (after_size + 1));
 	if (!dst)
 	{
 		free(dst);
@@ -31,7 +31,7 @@ void	*ft_ptr_realloc(void *buf, int before_size, int after_size)
 		dst[i] = src[i];
 		i++;
 	}
-	while (i < after_size)
+	while (i < after_size + 1)
 		dst[i++] = NULL;
 	free(buf);
 	return ((void *)dst);
@@ -65,4 +65,12 @@ char	*ft_get_line(int fd)
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
 	return (line);
+}
+
+void	free_throw(char *str, t_game *game, char **map_copy)
+{
+	if (map_copy)
+		free_split(map_copy, game->map_height);
+	free_split(game->map, game->map_height);
+	throw_error(str);
 }

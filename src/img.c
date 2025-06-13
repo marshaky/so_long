@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   img.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 03:16:10 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/21 03:18:25 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:05:02 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,14 @@ void	*ft_make_xpm_img(t_game *game, char *xpm_file)
 	{
 		free(img);
 		ft_printf("fileName: %s\n", xpm_file);
+		free_split(game->map, game->map_height);
 		throw_error("XPM Error : check ASSET_PATH or fileName");
 	}
 	else if (!(width == game->img_width && height == game->img_height))
+	{
+		free_split(game->map, game->map_height);
 		throw_error("TILE SIZE Error : incorrect tile size");
+	}
 	return (img);
 }
 

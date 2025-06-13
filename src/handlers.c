@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handlers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:56:04 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/13 01:56:28 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/13 20:19:16 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	find_player_position(t_game *game)
 			if (game->map[y][x] == 'P')
 			{
 				if (found)
-					throw_error("ComponentError : more than one player\n");
+					free_throw("Error: more than one player\n", game, NULL);
 				game->player_cord.x = x;
 				game->player_cord.y = y;
 				found = 1;
@@ -87,7 +87,7 @@ void	find_player_position(t_game *game)
 		y++;
 	}
 	if (!found)
-		throw_error("ComponentError : no player on the map\n");
+		free_throw("ComponentError : no player on the map\n", game, NULL);
 }
 
 void	count_components(t_game *game)
@@ -110,11 +110,11 @@ void	count_components(t_game *game)
 		y++;
 	}
 	if (game->player_cord.x == -1)
-		throw_error("ComponentError : player not found\n");
+		free_throw("ComponentError : player not found\n", game, NULL);
 	if (game->coin_count < 1)
-		throw_error("ComponentError : no coins on map\n");
+		free_throw("ComponentError : no coins on map\n", game, NULL);
 	if (game->exit_flag < 1)
-		throw_error("ComponentError : no exit on map\n");
+		free_throw("ComponentError : no exit on map\n", game, NULL);
 	if (game->exit_flag > 1)
-		throw_error("ComponentError : more than one exit\n");
+		free_throw("ComponentError : more than one exit\n", game, NULL);
 }

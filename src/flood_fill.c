@@ -6,7 +6,7 @@
 /*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:09:38 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/11 18:25:23 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/13 20:17:40 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ static void	check_reachability(t_game *game, char **map_copy)
 		while (++j < game->map_width)
 		{
 			if (game->map[i][j] == 'C' && map_copy[i][j] != 'F')
-				throw_error("PathError: unreachable coin found\n");
+				free_throw("Error: unreachable coin found\n", game, map_copy);
 			if (game->map[i][j] == 'E' && map_copy[i][j] != 'F')
-				throw_error("PathError: unreachable exit found\n");
+				free_throw("Error: unreachable exit found\n", game, map_copy);
 			if (game->map[i][j] == '0' && map_copy[i][j] != 'F')
-				throw_error("PathError: unreachable player found\n");
+				free_throw("Error: unreachable player found\n", game, map_copy);
 		}
 	}
 }
@@ -75,7 +75,10 @@ void	validate_reachability(t_game *game)
 
 	map_copy = copy_map(game->map, game->map_height);
 	if (!map_copy)
+	{
+		free_split(game->map, game->map_height);
 		throw_error("MemoryError: couldn't copy map for flood fill\n");
+	}
 	size.x = game->map_width;
 	size.y = game->map_height;
 	ff_recursive(map_copy, game->player_cord.x, game->player_cord.y, size);
