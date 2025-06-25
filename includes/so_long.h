@@ -6,7 +6,7 @@
 /*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:22:25 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/13 20:12:45 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:06:13 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ void	save_exit(t_game *game);
 void	free_split(char **str, int height);
 void	count_comp_free(t_game *game);
 void	free_throw(char *str, t_game *game, char **map_copy);
+void	ft_clean(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 03:16:10 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/22 17:23:13 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:10:06 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*ft_make_xpm_img(t_game *game, char *xpm_file)
 		free(img);
 		ft_printf("fileName: %s\n", xpm_file);
 		ft_clean(game);
-		throw_error("XPM Error : check ASSET_PATH or fileName");
+		throw_error("XPM Error : check ASSET_PATH or fileName\n");
 	}
 	else if (!(width == game->img_width && height == game->img_height))
 	{

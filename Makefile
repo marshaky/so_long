@@ -26,27 +26,29 @@ PRINTF = $(PRINTF_PATH)/libftprintf.a
 MLX = $(MLXPATH)/libmlx.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g $(foreach H,$(INCPATH),-I$(H))
+CFLAGS = -Wall -Wextra -Werror -g3 $(foreach H,$(INCPATH),-I$(H))
 
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Darwin)
 	MLXFLAGS = -framework OpenGL -framework AppKit
 else
-	MLXFLAGS = -lX11 -lXext -lm
+	MLXFLAGS = -lmlx -Lmlx -Imlx -lXext -lX11 -lm -lz -g3
 endif
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(PRINTF_PATH)
+	make -C $(MLXPATH)
 	$(CC) $(CFLAGS) $(OBJS) $(PRINTF) $(MLX) -o $(NAME) $(MLXFLAGS)
 
 $(SRCSPATH)%.o: $(SRCSPATH)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	make clean -C $(PRINTF_PATH)
+	make clean -C $(PRINTF_PATH) 
+	make clean -C $(MLXPATH)
 	rm -f $(OBJS)
 
 fclean: clean
