@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:25:29 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/19 18:26:24 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/25 18:44:33 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	open_and_read_map(t_game *game, int fd)
 	if (!line)
 	{
 		close(fd);
+		get_next_line(-1);
 		throw_error("FileError: map file is empty\n");
 	}
 	while (line)

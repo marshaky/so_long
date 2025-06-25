@@ -6,7 +6,7 @@
 /*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 04:17:27 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/13 20:12:10 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/25 18:38:05 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void	free_throw(char *str, t_game *game, char **map_copy)
 	if (map_copy)
 		free_split(map_copy, game->map_height);
 	free_split(game->map, game->map_height);
+	get_next_line(-1);
 	throw_error(str);
 }

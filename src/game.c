@@ -6,7 +6,7 @@
 /*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:13:28 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/11 18:16:28 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/22 17:18:44 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	init_window(t_game *game)
 	int	x;
 	int	y;
 
+	game->img_coin = NULL;
+	game->img_exit = NULL;
+	game->img_floor = NULL;
+	game->img_wall = NULL;
+	game->img_player = NULL;
 	x = game->map_width;
 	y = game->map_height;
 	game->mlx = mlx_init();

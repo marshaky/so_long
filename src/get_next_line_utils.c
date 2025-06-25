@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marshaky <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 04:47:06 by marshaky          #+#    #+#             */
-/*   Updated: 2025/05/10 04:59:40 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/25 18:42:37 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ char	*gnl_strdup(char **line)
 	i = 0;
 	if (!(**line))
 	{
-		free (*line);
-		*line = 0;
-		return (0);
+		free(*line);
+		*line = NULL;
+		return (NULL);
 	}
 	while ((*line)[i])
 		if ((*line)[i++] == '\n')

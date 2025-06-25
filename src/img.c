@@ -6,7 +6,7 @@
 /*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 03:16:10 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/12 18:05:02 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/22 17:23:13 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*ft_make_xpm_img(t_game *game, char *xpm_file)
 	{
 		free(img);
 		ft_printf("fileName: %s\n", xpm_file);
-		free_split(game->map, game->map_height);
+		ft_clean(game);
 		throw_error("XPM Error : check ASSET_PATH or fileName");
 	}
 	else if (!(width == game->img_width && height == game->img_height))
@@ -44,9 +44,24 @@ void	ft_put_img(t_game *game, void *img, int x, int y)
 
 void	destroy_imgs(t_game *game)
 {
-	mlx_destroy_image(game->mlx, game->img_floor);
-	mlx_destroy_image(game->mlx, game->img_wall);
-	mlx_destroy_image(game->mlx, game->img_player);
-	mlx_destroy_image(game->mlx, game->img_coin);
-	mlx_destroy_image(game->mlx, game->img_exit);
+	if (game->img_floor)
+		mlx_destroy_image(game->mlx, game->img_floor);
+	if (game->img_wall)
+		mlx_destroy_image(game->mlx, game->img_wall);
+	if (game->img_player)
+		mlx_destroy_image(game->mlx, game->img_player);
+	if (game->img_coin)
+		mlx_destroy_image(game->mlx, game->img_coin);
+	if (game->img_exit)
+		mlx_destroy_image(game->mlx, game->img_exit);
+}
+
+void	ft_clean(t_game *game)
+{
+	destroy_imgs(game);
+	if (game->map)
+		free_split(game->map, game->map_height);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
 }
