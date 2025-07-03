@@ -6,7 +6,7 @@
 /*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:13:28 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/22 17:18:44 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:02:57 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	start_game(t_game *game)
 int	close_game(t_game *game)
 {
 	ft_printf("END\n");
-	free_split(game->map, game->map_height);
+	if (game->map_height > 0)
+		free_split(game->map, game->map_height);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);

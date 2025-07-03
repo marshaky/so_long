@@ -6,7 +6,7 @@
 /*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:44:56 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/25 18:45:46 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:00:18 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	valid_characters(char *line, t_game *game)
 			&& line[i] != 'E' && line[i] != 'P')
 		{
 			free(line);
+			game->map_height = game->map_height - 1;
 			free_throw("CharacterError:invalid character in map\n", game, NULL);
 		}
 		i++;

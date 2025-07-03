@@ -6,7 +6,7 @@
 /*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 04:17:27 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/25 18:38:05 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:58:09 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	free_split(char **str, int height)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return ;
 	while (i < height)
 	{
 		free(str[i]);

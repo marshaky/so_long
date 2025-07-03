@@ -6,7 +6,7 @@
 /*   By: marshaky <marshaky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 05:25:29 by marshaky          #+#    #+#             */
-/*   Updated: 2025/06/25 18:44:33 by marshaky         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:42:37 by marshaky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static void	add_map_line(t_game *game, char *line, int row)
 		return ;
 	}
 	game->map_height++;
-	valid_characters(line, game);
+	if (line && game)
+		valid_characters(line, game);
 	tmp = (char **)ft_ptr_realloc(game->map, row, row + 1);
 	if (!tmp)
 	{
